@@ -3,9 +3,9 @@
    ========================================== */
 
 const SCHOOL = {
-  phone: "",     // example: "+234 800 000 0000"
-  email: "",     // example: "info@yourschool.com"
-  address: ""    // example: "12 School Road, City"
+  phone: "0817 275 1100, 0810 587 7337",
+  email: "triplealegacyinternationalsch@yahoo.com",
+  address: "Asese-Wazobia, 7 Adebisi Usman Street, Oloke"
 };
 
 /* Events shown on the Home page.
@@ -14,7 +14,7 @@ const EVENTS = [
   {
     date: "--|TBA",
     title: "Admission open day",
-    info: "Date to be announced. Meet our teachers and tour the school."
+    info: "Admission is in progress. Date to be announced. Meet our teachers and tour the school."
   },
   {
     date: "--|TBA",
@@ -51,7 +51,8 @@ $$("[data-fill]").forEach(el => {
   if (el.dataset.fill === "email") {
     el.innerHTML = `<a href="mailto:${value}">${value}</a>`;
   } else if (el.dataset.fill === "phone") {
-    el.innerHTML = `<a href="tel:${value.replace(/\s/g, "")}">${value}</a>`;
+    el.innerHTML = value.split(",").map(n => n.trim())
+      .map(n => `<a href="tel:${n.replace(/\s/g, "")}">${n}</a>`).join(", ");
   } else {
     el.textContent = value;
   }
@@ -393,7 +394,7 @@ if (form) {
     counter.textContent = message.value.length + "/500";
   };
 
-  form.onsubmit = event => {
+  form.onsubmit = async event => {
     event.preventDefault();
     let hasError = false;
 
@@ -414,19 +415,32 @@ if (form) {
 
     if (hasError) return;
 
-    // Open the visitor's email app with the message ready to send
+    // Send the message to the school's email through Resend (see api/contact.js)
     const data = Object.fromEntries(new FormData(form));
-    const body = `Name: ${data.name}\nEmail: ${data.email}\nTopic: ${data.topic}\n\n${data.message}`;
+    const button = $("button[type=submit]", form);
+    const failBox = $("#fail");
 
-    if (SCHOOL.email) {
-      location.href =
-        `mailto:${SCHOOL.email}` +
-        `?subject=${encodeURIComponent(data.topic + " - website enquiry")}` +
-        `&body=${encodeURIComponent(body)}`;
+    failBox.hidden = true;
+    button.disabled = true;
+    button.textContent = "Sending...";
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) throw new Error("Send failed");
+
+      form.hidden = true;
+      $("#sent").hidden = false;
+      confetti();
+    } catch (error) {
+      failBox.hidden = false;
+    } finally {
+      button.disabled = false;
+      button.textContent = "Send message";
     }
-
-    form.hidden = true;
-    $("#sent").hidden = false;
-    confetti();
   };
 }
