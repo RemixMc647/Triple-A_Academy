@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact | Triple A Legacy International School</title>
+<meta name="description" content="Triple A Legacy International School: Learning today for a better tomorrow. Creche, Early Years, Nursery, Primary, After School Club and College.">
+<link rel="icon" href="images/logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;800&display=swap">
+<link rel="stylesheet" href="style.css"></head><body>
+<div class="rainbow"></div>
+<header><div class="wrap bar"><a href="index.html" aria-label="Triple A Legacy International School home"><img src="images/logo-full.png" alt="Triple A Legacy International School"></a>
+<button id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
+<nav id="nav" aria-label="Main"><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="academics.html">Academics</a></li><li><a href="contact.html" aria-current="page">Contact</a></li></ul></nav></div></header>
+<main><section class="hero"><div class="wrap"><div><h1>Contact us</h1><p>Questions about admission or our sections? Send us a message.</p></div><img src="images/logo-icon.png" alt="Triple A school emblem"></div></section>
+<section><div class="wrap split" style="align-items:start"><div><h2>Send a message</h2>
+<form id="contact-form" novalidate>
+<label>Your name<input name="name" required autocomplete="name"><span class="err"></span></label>
+<label>Email address<input name="email" type="email" required autocomplete="email"><span class="err"></span></label>
+<label>Topic<select name="topic" required><option value="">Choose a topic</option><option>Admission</option><option>Creche</option><option>Early Years</option><option>Nursery</option><option>Primary</option><option>After School Club</option><option>College</option><option>Other</option></select><span class="err"></span></label>
+<label>Message<textarea name="message" rows="5" required></textarea><span class="err"></span></label>
+<button class="btn" type="submit">Send message</button></form>
+<p id="sent" class="ok" hidden>Thank you. Your message is ready to send, and we will reply as soon as we can.</p></div>
+<div class="card"><h3>School details</h3><p><strong>Phone:</strong> <span data-fill="phone"></span></p><p><strong>Email:</strong> <span data-fill="email"></span></p><p><strong>Address:</strong> <span data-fill="address"></span></p><p><strong>Head Teacher:</strong> available by appointment.</p></div></div></section></main>
+<footer><div class="wrap"><div class="grid">
+<div><h3>Triple A Legacy International School</h3><p>Learning today for a better tomorrow.</p></div>
+<div><h3>Explore</h3><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="academics.html">Academics</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+<div><h3>Contact</h3><ul><li>Phone: <span data-fill="phone"></span></li><li>Email: <span data-fill="email"></span></li><li>Address: <span data-fill="address"></span></li></ul></div></div>
+<p class="copy">&copy; <span id="year"></span> Triple A Legacy International School. All rights reserved.</p></div></footer>
+<script src="script.js"></script></body></html>
