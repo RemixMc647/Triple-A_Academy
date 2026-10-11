@@ -64,9 +64,20 @@ $("#year").textContent = new Date().getFullYear();
    PAGE LOADER
    ========================================== */
 
-addEventListener("load", () => {
-  setTimeout(() => $("#load").classList.add("done"), 500);
-});
+// Hide the loader as soon as the page structure is ready,
+// instead of waiting for every image and font to finish.
+function hideLoader() {
+  $("#load").classList.add("done");
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", hideLoader);
+} else {
+  hideLoader();
+}
+
+// Safety: never let the loader stay longer than 1.5 seconds
+setTimeout(hideLoader, 1500);
 
 
 /* ==========================================
